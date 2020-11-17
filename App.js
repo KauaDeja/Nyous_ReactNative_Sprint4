@@ -9,30 +9,30 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
 const Drawer = createDrawerNavigator();
-const Stack  = createStackNavigator();
+const Stack = createStackNavigator();
 
 // Paginas
 import Login from './pages/Login'
-import Home  from './pages/Home'
+import Home from './pages/Home'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Autenticado = () => {
-  return(
+  return (
     <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Home" component={Home} />
-        <Drawer.Screen name="Logout" component={Logout} />
+      <Drawer.Screen name="Home" component={Home} />
+      <Drawer.Screen name="Logout" component={Logout} />
     </Drawer.Navigator>
   )
 }
 
-const Logout = ( {navigation} ) => {
-  return(
+const Logout = ({ navigation }) => {
+  return (
     <View>
       <Text>Deseja realmente sair da aplicação?</Text>
       <Button onPress={() => {
         AsyncStorage.removeItem('@jwt');
         navigation.push('Login');
-      }} title="SAIR" ></Button>
+      }} title="Sair" ></Button>
     </View>
   )
 }
@@ -40,10 +40,12 @@ const Logout = ( {navigation} ) => {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{ headerShown : false }}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Autenticado" component={Autenticado} />
-      </Stack.Navigator>
+      {// Ao deixar o headershow como falso, ele para de exibir o menu do topo
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Autenticado" component={Autenticado} />
+        </Stack.Navigator>
+      }
     </NavigationContainer>
   );
 }

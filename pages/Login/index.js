@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Login = ( {navigation} ) => {
 
+    // state => {get; set;}
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
 
@@ -16,14 +17,14 @@ const Login = ( {navigation} ) => {
           // saving error
         }
     }
-
+    // Método Logar
     const Logar = () => {
         
         const corpo = {
             email : email,
             senha : senha
         }
-
+        // Ao invés de passarmos a o localhost, agora é o IP
         fetch('http://192.168.0.18:5000/api/Account/login', {
             method: 'POST',
             headers :{
@@ -48,8 +49,8 @@ const Login = ( {navigation} ) => {
     }
 
     return(
+        // Html do React_Native
         <View style={styles.container}>
-
             <Image
                 style={styles.logo}
                 source={{
@@ -59,30 +60,30 @@ const Login = ( {navigation} ) => {
 
             <TextInput
                 style={styles.input}
-                onChangeText={text => setEmail(text)}//adiciono um evento ao input 
+                onChangeText={text => setEmail(text)}// Adiciono um evento ao input 
                 value={email}
                 placeholder="Digite seu email"
             />
 
             <TextInput
                 style={styles.input}
-                onChangeText={text => setSenha(text)}//adiciono um evento ao input 
+                onChangeText={text => setSenha(text)}// Adiciono um evento ao input 
                 value={senha}
                 placeholder="Digite sua senha"
-                secureTextEntry={true}
+                secureTextEntry={true}// Deixa a senha invísivel
             />
 
             <TouchableOpacity
                 style={styles.button}
                 onPress={Logar}//adiciono um evento ao Botao 
             >
-                <Text style={styles.textButton}>ENTRAR</Text>
+                <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>
 
         </View>
     )
 }
-
+// CSS do React_Native
 const styles = StyleSheet.create({
     container: {
       flex: 1,
